@@ -11,11 +11,10 @@ app.use(express.json({ limit: '256kb' }));
 
 // CORS for Vite dev server
 const viteOrigin = process.env.VITE_ORIGIN || 'http://localhost:5173';
-app.use(
-  cors({
-    origin: [viteOrigin],
-  })
-);
+const extraOrigins = (process.env.ALLOWED_ORIGINS || 'https://suryadaiv.github.io')
+.split(',')
+.map(s => s.trim());
+app.use(cors({ origin: [viteOrigin, ...extraOrigins] }));
 
 // Basic rate limit 30 req/min/IP
 const limiter = rateLimit({
