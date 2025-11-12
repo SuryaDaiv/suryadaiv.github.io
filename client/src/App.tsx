@@ -8,7 +8,9 @@ import type { LanguageKey, RunResponse } from './types';
 import './index.css';
 import { BRAND, THEME } from './config';
 
-const API = axios.create({ baseURL: 'http://localhost:3001' });
+const API = axios.create({
+baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001'
+});
 
 export default function App() {
   const [view, setView] = useState<'home' | 'editor'>('home');
