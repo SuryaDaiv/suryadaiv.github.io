@@ -7,14 +7,33 @@ require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
-const judge0_js_1 = require("./judge0.js");
+const helmet_1 = __importDefault(require("helmet"));
+const judge0_1 = require("./judge0");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const isProd = NODE_ENV === 'production';
+app.disable('x-powered-by');
+app.set('trust proxy', 1);
+app.use((0, helmet_1.default)({
+    contentSecurityPolicy: false,
+}));
 app.use(express_1.default.json({ limit: '256kb' }));
-// CORS for Vite dev server
 const viteOrigin = process.env.VITE_ORIGIN || 'http://localhost:5173';
+const clientOrigin = process.env.CLIENT_ORIGIN || 'https://suryadaiv.github.io';
+const allowedOrigins = isProd
+    ? [clientOrigin]
+    : [viteOrigin, clientOrigin];
 app.use((0, cors_1.default)({
-    origin: [viteOrigin],
+    origin(origin, callback) {
+        if (!origin) {
+            return callback(null, true);
+        }
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Not allowed by CORS'));
+    },
 }));
 // Basic rate limit 30 req/min/IP
 const limiter = (0, express_rate_limit_1.default)({
@@ -77,8 +96,8 @@ app.post('/api/run', async (req, res) => {
         if (!langId) {
             return res.status(400).json({ error: 'Invalid or missing language' });
         }
-        const client = (0, judge0_js_1.createJudge0Client)(process.env.JUDGE0_BASE_URL, process.env.JUDGE0_API_KEY);
-        const result = await (0, judge0_js_1.submitAndWait)(client, {
+        const client = (0, judge0_1.createJudge0Client)(process.env.JUDGE0_BASE_URL, process.env.JUDGE0_API_KEY);
+        const result = await (0, judge0_1.submitAndWait)(client, {
             language_id: langId,
             source_code: body.source,
             stdin: body.stdin ?? '',

@@ -2,18 +2,44 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
 import { createJudge0Client, submitAndWait } from './judge0';
 
 const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const isProd = NODE_ENV === 'production';
+
+app.disable('x-powered-by');
+app.set('trust proxy', 1);
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 app.use(express.json({ limit: '256kb' }));
 
-// CORS for Vite dev server
 const viteOrigin = process.env.VITE_ORIGIN || 'http://localhost:5173';
+const clientOrigin =
+  process.env.CLIENT_ORIGIN || 'https://suryadaiv.github.io';
+
+const allowedOrigins = isProd
+  ? [clientOrigin]
+  : [viteOrigin, clientOrigin];
+
 app.use(
   cors({
-    origin: [viteOrigin],
+    origin(origin, callback) {
+      if (!origin) {
+        return callback(null, true);
+      }
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
   })
 );
 
