@@ -1,5 +1,6 @@
 import React from 'react';
 import { BRAND, THEME } from '../config';
+import AdSlot from './AdSlot';
 
 type Props = {
   onStart: () => void;
@@ -29,6 +30,10 @@ export default function Home({ onStart }: Props) {
           </div>
         </section>
 
+        <div className="my-8">
+          <AdSlot slot="8370573240" className="w-full" />
+        </div>
+
         {/* Badges */}
         <section id="badges" className={`py-6 border-t ${THEME.divider}`}>
           <h2 className="sr-only">Trusted by</h2>
@@ -57,6 +62,10 @@ export default function Home({ onStart }: Props) {
             </div>
           </div>
         </section>
+
+        <div className="my-10">
+          <AdSlot slot="5834225030" className="w-full" />
+        </div>
 
         {/* Demo Block */}
         <section id="demo_block" className={`py-12 border-t ${THEME.divider}`}>

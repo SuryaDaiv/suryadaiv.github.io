@@ -7,6 +7,7 @@ import { TEMPLATES } from './lib/templates';
 import type { LanguageKey, RunResponse } from './types';
 import './index.css';
 import { BRAND, THEME } from './config';
+import AdSlot from './components/AdSlot';
 
 const API = axios.create({
   baseURL: 'https://suryadaiv-github-io.onrender.com',
@@ -164,6 +165,9 @@ export default function App() {
         <div className="ml-auto text-sm text-gray-400">
           Ctrl/Cmd + Enter to run
         </div>
+      </div>
+      <div className={`p-2 border-b ${THEME.divider} ${THEME.headerBg}`}>
+        <AdSlot slot="4521143365" className="mx-auto max-w-6xl" format="auto" />
       </div>
 
       {/* Middle: Editor + Results */}
