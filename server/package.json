@@ -4,6 +4,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "helmet": "^7",
     "axios": "^1",
     "cors": "^2",
     "dotenv": "^16",
@@ -11,6 +12,7 @@
     "express-rate-limit": "^7"
   },
   "devDependencies": {
+    "@types/helmet": "^4.0.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^4",
     "@types/node": "^20",
