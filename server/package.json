@@ -9,7 +9,9 @@
     "cors": "^2",
     "dotenv": "^16",
     "express": "^4",
-    "express-rate-limit": "^7"
+    "express-rate-limit": "^7",
+    "socket.io": "^4",
+    "nanoid": "^5"
   },
   "devDependencies": {
     "@types/helmet": "^4.0.0",

@@ -3,9 +3,12 @@ import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
+import { createServer } from 'http';
 import { createJudge0Client, submitAndWait } from './judge0';
+import { initializeCollaboration } from './collaboration';
 
 const app = express();
+const httpServer = createServer(app);
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const isProd = NODE_ENV === 'production';
@@ -61,7 +64,10 @@ type LanguageKey =
   | 'typescript'
   | 'python'
   | 'go'
-  | 'ruby';
+  | 'ruby'
+  | 'kotlin'
+  | 'sql'
+  | 'rust';
 
 const LANGUAGE_IDS: Record<LanguageKey, number> = {
   c: 50, // C (GCC)
@@ -73,6 +79,9 @@ const LANGUAGE_IDS: Record<LanguageKey, number> = {
   python: 71, // Python 3
   go: 60,
   ruby: 72,
+  kotlin: 78,
+  sql: 82,
+  rust: 73,
 };
 
 function resolveLanguageId(input: string | number): number | null {
@@ -96,6 +105,11 @@ function resolveLanguageId(input: string | number): number | null {
     golang: 'go',
     ruby: 'ruby',
     rb: 'ruby',
+    kotlin: 'kotlin',
+    kt: 'kotlin',
+    sql: 'sql',
+    rust: 'rust',
+    rs: 'rust',
   };
   const langKey = map[key];
   if (!langKey) return null;
@@ -122,8 +136,8 @@ app.post('/api/run', async (req, res) => {
       typeof body.languageId === 'number'
         ? body.languageId
         : body.language
-        ? resolveLanguageId(body.language)
-        : null;
+          ? resolveLanguageId(body.language)
+          : null;
     if (!langId) {
       return res.status(400).json({ error: 'Invalid or missing language' });
     }
@@ -162,6 +176,10 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: true });
 });
 
-app.listen(PORT, () => {
+// Initialize Socket.io collaboration
+initializeCollaboration(httpServer);
+
+httpServer.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
+  console.log('WebSocket collaboration enabled');
 });
