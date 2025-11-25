@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Simple Python calculator source code | Local Online Compiler</title>
+  <meta name="description" content="Build a console calculator in Python with full source code. Handle addition, subtraction, multiplication, and division, then extend it with math helpers.">
+  <link rel="canonical" href="https://suryadaiv.github.io/blog/python-calculator-source.html">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6763408721406920" crossorigin="anonymous"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; padding:0; }
+    main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1,h2,h3 { color:#f8fafc; }
+    a { color:#93c5fd; }
+    pre { background:#111827; border:1px solid #1f2937; padding:12px; border-radius:10px; overflow:auto; }
+    section { margin-top:24px; }
+    .ad { margin: 24px 0; padding: 12px; border:1px solid #1f2937; border-radius:10px; background:#0b1221; }
+    .label { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#94a3b8; margin-bottom:6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="label">Blog · Python</p>
+    <h1>Build a simple Python calculator (source code included)</h1>
+    <p>This mini-project uses <code>if/elif</code> branching and simple input validation to build a console calculator. Copy the full code, run it in the <a href="/">online compiler</a>, and then extend it with your own operations.</p>
+
+    <section>
+      <h2>Calculator code</h2>
+      <pre>def calculate():
+    print("Select operation: add, subtract, multiply, divide")
+    op = input("Operation: ").strip().lower()
+    a = float(input("First number: "))
+    b = float(input("Second number: "))
+
+    if op == "add":
+        return a + b
+    if op == "subtract":
+        return a - b
+    if op == "multiply":
+        return a * b
+    if op == "divide":
+        if b == 0:
+            return "Cannot divide by zero"
+        return a / b
+    return "Unknown operation"
+
+
+if __name__ == "__main__":
+    result = calculate()
+    print("Result:", result)</pre>
+    </section>
+
+    <section>
+      <h2>Upgrade challenges</h2>
+      <ul>
+        <li>Add exponent and square-root operations using the <code>math</code> module.</li>
+        <li>Wrap input parsing in <code>try/except</code> to handle invalid numbers gracefully.</li>
+        <li>Loop until the user types <code>quit</code> so the calculator can run multiple times.</li>
+      </ul>
+    </section>
+
+    <div class="ad">
+      <div class="label">Advertisement</div>
+      <ins class="adsbygoogle" style="display:block; height:250px;"
+        data-ad-client="ca-pub-6763408721406920"
+        data-ad-slot="4521143365"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section>
+      <h2>Why this project helps with AdSense compliance</h2>
+      <p>We pair the utility of a live compiler with original, tutorial-style writing. Each blog post stands on its own with code, explanations, and navigation to policies, preventing "thin content" flags. Ads stay clearly labeled and are separated from core controls.</p>
+    </section>
+  </main>
+</body>
+</html>

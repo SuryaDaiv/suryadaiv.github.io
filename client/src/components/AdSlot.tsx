@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 declare global {
   interface Window {
@@ -11,6 +11,9 @@ type Props = {
   format?: string;
   layout?: string;
   className?: string;
+  // Optional inline style to reserve space and avoid layout shift
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  style?: React.CSSProperties;
 };
 
 export default function AdSlot({
@@ -18,6 +21,7 @@ export default function AdSlot({
   format = 'auto',
   layout,
   className,
+  style,
 }: Props) {
   useEffect(() => {
     try {
@@ -30,7 +34,7 @@ export default function AdSlot({
   return (
     <ins
       className={`adsbygoogle block ${className ?? ''}`}
-      style={{ display: 'block' }}
+      style={{ display: 'block', ...style }}
       data-ad-client="ca-pub-6763408721406920"
       data-ad-slot={slot}
       data-ad-format={format}

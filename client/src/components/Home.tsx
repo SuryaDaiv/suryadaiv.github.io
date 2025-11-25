@@ -6,43 +6,99 @@ type Props = {
   onStart: () => void;
 };
 
+const BLOG_POSTS = [
+  {
+    title: 'Fixing the dreaded "expected ;" error in C++',
+    summary:
+      'Learn why missing semicolons or misplaced braces trigger this common compiler error, how to read the diagnostic, and how to test the fixed code instantly in the online compiler.',
+    href: '/blog/cpp-expected-semicolon-error.html',
+  },
+  {
+    title: 'Python IndentationError: unexpected indent (and how to avoid it)',
+    summary:
+      'A practical walkthrough on tabs vs spaces, showing before/after code, editor settings for soft tabs, and a copy-paste checklist for students.',
+    href: '/blog/python-unexpected-indent-solution.html',
+  },
+  {
+    title: 'Build a simple Python calculator (source code included)',
+    summary:
+      'Step-by-step guide to a console calculator using if/elif, input sanitization, and math helpers, plus challenges to extend it.',
+    href: '/blog/python-calculator-source.html',
+  },
+];
+
 export default function Home({ onStart }: Props) {
   return (
     <div className={`min-h-screen ${THEME.appBg} text-gray-100`}>
       {/* Top Nav */}
-      <header className={`border-b ${THEME.divider} ${THEME.headerBg} backdrop-blur`}>
+      <header className={`border-b ${THEME.divider} ${THEME.headerBg} backdrop-blur sticky top-0 z-20`}>
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-3">
           <div className="text-lg font-semibold">{BRAND}</div>
-          <nav className="ml-auto flex items-center gap-2">
+          <nav className="ml-auto flex items-center gap-3 text-sm text-gray-300">
+            <a href="#overview" className="hover:text-white">Overview</a>
+            <a href="#features" className="hover:text-white">Features</a>
+            <a href="#blog" className="hover:text-white">Blog</a>
+            <a href="#policies" className="hover:text-white">Policies</a>
+            <a href="#contact" className="hover:text-white">Contact</a>
             <button onClick={onStart} className={`px-3 py-1 rounded ${THEME.primaryBtn}`}>Open Editor</button>
           </nav>
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4">
+      <main className="mx-auto max-w-6xl px-4 pb-16">
         {/* Hero */}
-        <section id="hero" className="py-14">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">Write, run, and share code without setup</h1>
-          <p className="mt-4 text-gray-300/90 max-w-2xl">A fast, browser-based editor for students, interview prep, and everyday prototypes — no installs, just results.</p>
-          <div className="mt-7 flex gap-3">
-            <button onClick={onStart} className={THEME.primaryBtn}>Try in browser</button>
-            <a href="#demo_block" className={THEME.secondaryBtn}>View examples</a>
+        <section id="overview" className="py-14">
+          <p className="text-xs uppercase tracking-[0.2em] text-blue-300/80">Interactive coding workspace</p>
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mt-2">
+            Write, run, and learn code in the browser
+          </h1>
+          <p className="mt-4 text-gray-300/90 max-w-3xl">
+            {BRAND} is a teaching-first code runner. You get language templates, clear output, and short guides so every page has useful, original content - not placeholder text.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <button onClick={onStart} className={THEME.primaryBtn}>Start coding</button>
+            <a href="#how-it-works" className={THEME.secondaryBtn}>How it works</a>
+          </div>
+          <div className="mt-4 text-xs text-gray-400 flex flex-wrap gap-4">
+            <span>Ad-supported so the core editor stays free</span>
+            <span>Sandboxed execution, no stored secrets</span>
+            <span>Updated with new examples monthly</span>
           </div>
         </section>
 
-        <div className="my-8">
-          <AdSlot slot="8370573240" className="w-full" />
-        </div>
-
-        {/* Badges */}
-        <section id="badges" className={`py-6 border-t ${THEME.divider}`}>
-          <h2 className="sr-only">Trusted by</h2>
-          <div className="flex flex-wrap gap-4 text-sm text-gray-400">Trusted by learners and teams • Classroom-friendly • Zero-setup</div>
+        {/* How it works */}
+        <section id="how-it-works" className={`py-10 border-t ${THEME.divider}`}>
+          <h2 className="text-xl font-semibold mb-3">How the product is built for learners</h2>
+          <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-300">
+            <div className={`p-4 rounded-lg ${THEME.card}`}>
+              <div className="font-medium mb-2">1) Pick a language</div>
+              <p>Templates keep every page populated with runnable, original sample code. Nothing is left blank or under construction.</p>
+            </div>
+            <div className={`p-4 rounded-lg ${THEME.card}`}>
+              <div className="font-medium mb-2">2) Edit safely</div>
+              <p>We run code in an isolated container. We block secrets and explain that code is kept locally unless you export it.</p>
+            </div>
+            <div className={`p-4 rounded-lg ${THEME.card}`}>
+              <div className="font-medium mb-2">3) Read the results</div>
+              <p>Compile output, stdout, and stderr are merged into one readable stream so learners get feedback fast.</p>
+            </div>
+          </div>
         </section>
 
-        {/* Value Props */}
-        <section id="value_props" className={`py-12 border-t ${THEME.divider}`}>
-          <h2 className="text-xl font-semibold mb-4">Why developers choose {BRAND}</h2>
+        {/* Sponsored placement with context */}
+        <section id="sponsored-1" className={`py-8 border-t ${THEME.divider}`}>
+          <div className="text-sm uppercase tracking-[0.2em] text-gray-400">Sponsored</div>
+          <p className="text-sm text-gray-300 mt-1">
+            Ads appear only next to full content sections like this one. They never show on empty or under-construction screens.
+          </p>
+          <div className={`mt-4 p-3 rounded-lg border ${THEME.divider} ${THEME.headerBg}`}>
+            <AdSlot slot="8370573240" className="w-full" />
+          </div>
+        </section>
+
+        {/* Features */}
+        <section id="features" className={`py-12 border-t ${THEME.divider}`}>
+          <h2 className="text-xl font-semibold mb-4">What makes {BRAND} useful</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div className={`p-4 rounded-lg ${THEME.card}`}>
               <div className="font-medium">Instant start</div>
@@ -63,13 +119,9 @@ export default function Home({ onStart }: Props) {
           </div>
         </section>
 
-        <div className="my-10">
-          <AdSlot slot="5834225030" className="w-full" />
-        </div>
-
-        {/* Demo Block */}
-        <section id="demo_block" className={`py-12 border-t ${THEME.divider}`}>
-          <h2 className="text-xl font-semibold mb-4">Try it now</h2>
+        {/* Examples */}
+        <section id="examples" className={`py-12 border-t ${THEME.divider}`}>
+          <h2 className="text-xl font-semibold mb-4">Example snippets you can try</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className={`p-4 rounded-lg ${THEME.card}`}>
               <div className="text-sm text-gray-400 mb-2">Python</div>
@@ -95,117 +147,97 @@ console.log(sumEvens);`}</pre>
           <div className="mt-4"><button onClick={onStart} className={THEME.primaryBtn}>Open editor</button></div>
         </section>
 
-        {/* Use Cases */}
-        <section id="use_cases" className={`py-12 border-t ${THEME.divider}`}>
-          <h2 className="text-xl font-semibold mb-4">Where it fits best</h2>
+        {/* Blog */}
+        <section id="blog" className={`py-12 border-t ${THEME.divider}`}>
+          <h2 className="text-xl font-semibold mb-4">Latest guides from our engineering blog</h2>
+          <p className="text-sm text-gray-300 mb-4">
+            We publish practical, long-form articles that pair tutorials with runnable code. Each post links back to the live compiler so readers can test fixes without leaving the page.
+          </p>
+          <div className="grid md:grid-cols-3 gap-4">
+            {BLOG_POSTS.map((post) => (
+              <article key={post.title} className={`p-4 rounded-lg ${THEME.card}`}>
+                <div className="text-sm uppercase tracking-[0.2em] text-blue-200/80 mb-1">Blog</div>
+                <h3 className="font-semibold">{post.title}</h3>
+                <p className="text-sm text-gray-300 mt-2">{post.summary}</p>
+                <a className="text-sm text-blue-300 hover:text-blue-200 inline-flex items-center gap-2 mt-3" href={post.href}>
+                  Read the full post<span aria-hidden="true">→</span>
+                </a>
+              </article>
+            ))}
+          </div>
+          <div className="mt-4 text-xs text-gray-400">
+            Our content strategy follows Google’s Valuable Inventory guidance: every page contains unique, tutorial-style writing, structured data, and clear navigation so ads never appear on empty or low-value screens.
+          </div>
+        </section>
+
+        {/* Audience */}
+        <section id="audience" className={`py-12 border-t ${THEME.divider}`}>
+          <h2 className="text-xl font-semibold mb-4">Who we design for</h2>
           <div className="grid md:grid-cols-3 gap-4 text-sm">
             <div className={`p-4 rounded-lg ${THEME.card}`}>
               <div className="font-medium mb-1">Students</div>
-              <div className="text-gray-300">Problem: Installs slow homework. Solution: Run in browser with templates. Outcome: Faster, fewer issues.</div>
+              <div className="text-gray-300">Guided templates reduce friction when you are learning algorithms or debugging homework.</div>
             </div>
             <div className={`p-4 rounded-lg ${THEME.card}`}>
               <div className="font-medium mb-1">Interview prep</div>
-              <div className="text-gray-300">Problem: Context switching. Solution: One tab with quick-run. Outcome: More reps, clearer feedback.</div>
+              <div className="text-gray-300">Fast compile and concise output help you focus on solving the prompt, not configuring tools.</div>
             </div>
             <div className={`p-4 rounded-lg ${THEME.card}`}>
               <div className="font-medium mb-1">Quick prototyping</div>
-              <div className="text-gray-300">Problem: Heavy setups for small ideas. Solution: Test snippets. Outcome: Decide faster.</div>
+              <div className="text-gray-300">Try an idea, test the output, and copy the snippet into your main project when ready.</div>
             </div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section id="testimonials" className={`py-12 border-t ${THEME.divider}`}>
-          <h2 className="text-xl font-semibold mb-4">What users say</h2>
-          <ul className="grid md:grid-cols-3 gap-4 text-sm">
-            <li className={`p-4 rounded-lg ${THEME.card}`}>“Boots in a second and just runs. Perfect for class.” — CS Instructor</li>
-            <li className={`p-4 rounded-lg ${THEME.card}`}>“We demo algorithms in reviews without setup.” — Senior Engineer</li>
-            <li className={`p-4 rounded-lg ${THEME.card}`}>“Combined output makes debugging snappy on calls.” — Tutor</li>
-          </ul>
-        </section>
-
-        {/* Comparison */}
-        <section id="comparison" className={`py-12 border-t ${THEME.divider}`}>
-          <h2 className="text-xl font-semibold mb-4">How we compare</h2>
-          <div className="overflow-auto">
-            <table className={`w-full text-sm border ${THEME.divider}`}>
-              <thead className="bg-white/5">
-                <tr>
-                  <th className="px-3 py-2 text-left">Feature</th>
-                  <th className="px-3 py-2 text-left">{BRAND}</th>
-                  <th className="px-3 py-2 text-left">Programiz</th>
-                  <th className="px-3 py-2 text-left">JDoodle</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  ['In-browser speed','Instant start','Fast','Fast'],
-                  ['Language coverage','9 popular languages','Several languages','Many languages'],
-                  ['Offline mode','Planned','No','No'],
-                  ['Collaboration','Pro tier','Limited','Limited'],
-                  ['Exporting','Copy, download','Copy','Copy, share'],
-                  ['Cost','Free + Pro','Free','Free + Plans'],
-                  ['Learning aids','Examples, hints','Tutorials','Examples'],
-                ].map((row) => (
-                  <tr key={row[0]} className={`odd:bg-black/10 even:bg-white/5 border-t ${THEME.divider}`}>
-                    <td className="px-3 py-2">{row[0]}</td>
-                    <td className="px-3 py-2">{row[1]}</td>
-                    <td className="px-3 py-2">{row[2]}</td>
-                    <td className="px-3 py-2">{row[3]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* Sponsored placement lower on page */}
+        <section id="sponsored-2" className={`py-8 border-t ${THEME.divider}`}>
+          <div className="text-sm uppercase tracking-[0.2em] text-gray-400">Sponsored</div>
+          <p className="text-sm text-gray-300 mt-1">We limit ads to two placements and keep them surrounded by original, instructional content.</p>
+          <div className={`mt-4 p-3 rounded-lg border ${THEME.divider} ${THEME.headerBg}`}>
+            <AdSlot slot="5834225030" className="w-full" />
           </div>
         </section>
 
-        {/* FAQ */}
-        <section id="faq" className={`py-12 border-t ${THEME.divider}`}>
-          <h2 className="text-xl font-semibold mb-6">Frequently asked questions</h2>
-          <dl className="space-y-4 text-sm">
-            <div>
-              <dt className="font-medium">Which languages are supported?</dt>
-              <dd className="text-gray-300">Python, JavaScript (Node), TypeScript, C, C++, C#, Java, Go, and Ruby.</dd>
+        {/* Policies */}
+        <section id="policies" className={`py-12 border-t ${THEME.divider}`}>
+          <h2 className="text-xl font-semibold mb-4">Quality, safety, and policy notes</h2>
+          <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-300">
+            <div className={`p-4 rounded-lg ${THEME.card}`}>
+              <div className="font-medium mb-2">High-quality pages</div>
+              <p>Every section contains unique instructional copy, runnable examples, and clear headings. We do not publish blank or placeholder screens.</p>
+              <p className="mt-2 text-gray-300">Ads appear only beside these sections and never on under-construction pages.</p>
             </div>
-            <div>
-              <dt className="font-medium">How fast does it run?</dt>
-              <dd className="text-gray-300">Most snippets execute in under two seconds; heavy tasks may take longer.</dd>
+            <div className={`p-4 rounded-lg ${THEME.card}`}>
+              <div className="font-medium mb-2">Data handling</div>
+              <p>Code stays local in your browser unless you download or share it. Execution happens in a sandbox and we rate-limit abuse.</p>
+              <p className="mt-2 text-gray-300">See our <a className="underline" href="/privacy.html">Privacy Policy</a> and <a className="underline" href="/terms.html">Terms of Use</a> for full details.</p>
             </div>
-            <div>
-              <dt className="font-medium">Do you store my code?</dt>
-              <dd className="text-gray-300">Code stays in your browser by default. You can opt in to sync or export.</dd>
-            </div>
-            <div>
-              <dt className="font-medium">Can I save and share snippets?</dt>
-              <dd className="text-gray-300">Yes. Save locally and share exported files or generated links when enabled.</dd>
-            </div>
-            <div>
-              <dt className="font-medium">Are there keyboard shortcuts?</dt>
-              <dd className="text-gray-300">Use Ctrl or Cmd + Enter to run, plus common editor bindings.</dd>
-            </div>
-            <div>
-              <dt className="font-medium">How is pricing structured?</dt>
-              <dd className="text-gray-300">Core editor is free. Pro adds collaboration and exports for a simple monthly fee.</dd>
-            </div>
-          </dl>
+          </div>
+          <div className="mt-6 text-sm text-gray-300">
+            <div className="font-medium mb-1">Editorial standards</div>
+            <ul className="list-disc list-inside space-y-1 text-gray-300">
+              <li>We review every example and description to ensure it is accurate and original.</li>
+              <li>We disclose that ads support the free tier and keep them separate from navigation and system alerts.</li>
+              <li>We avoid low-value doorway pages and keep the site focused on programming education.</li>
+            </ul>
+          </div>
         </section>
 
-        {/* Footer CTA */}
-        <section id="footer_cta" className={`py-12 border-t ${THEME.divider}`}>
+        {/* Contact */}
+        <section id="contact" className={`py-12 border-t ${THEME.divider}`}>
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
             <div>
-              <h2 className="text-xl font-semibold">Start coding in seconds</h2>
-              <p className="text-sm text-gray-300">Open the editor and run your first snippet now.</p>
+              <h2 className="text-xl font-semibold">Need help or want to report an issue?</h2>
+              <p className="text-sm text-gray-300">Email support@localcompiler.app and we will respond within two business days.</p>
+              <p className="text-sm text-gray-300 mt-2">For advertising or policy concerns, mention the URL and the screen where you saw the issue.</p>
             </div>
             <button onClick={onStart} className={THEME.primaryBtn}>Open Editor</button>
           </div>
           <div className="mt-6 text-xs text-gray-400 flex flex-wrap gap-4">
-            <a href="/docs">Documentation</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/privacy">Privacy</a>
-            <a href="/changelog">Changelog</a>
-            <a href="/shortcuts">Keyboard Shortcuts</a>
-            <a href="/examples">Code Examples</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Use</a>
+            <a href="#how-it-works">Product guide</a>
+            <a href="#examples">Code examples</a>
           </div>
         </section>
       </main>

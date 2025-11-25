@@ -83,7 +83,7 @@ export default function App() {
   }, []);
 
   const outputText = useMemo(() => {
-    if (!result) return loading ? 'Waiting for result…' : 'Run to see output';
+    if (!result) return loading ? 'Waiting for result...' : 'Run to see output';
     const parts: string[] = [];
     if (result.compile_output && result.compile_output.trim()) parts.push(result.compile_output.trim());
     if (result.stdout && result.stdout.trim()) parts.push(result.stdout.trim());
@@ -98,76 +98,84 @@ export default function App() {
   return (
     <div className={`h-screen flex flex-col ${THEME.appBg}`}>
       {/* Top Bar */}
-      <div className={`flex items-center gap-3 p-3 ${THEME.headerBg} border-b ${THEME.divider}`}>
-        <div className="text-lg font-semibold">{BRAND}</div>
-        <button onClick={() => setView('home')} className={`ml-2 px-3 py-1 rounded ${THEME.controlBg}`}>Home</button>
-        <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-300">Language</label>
-          <select
-            className={THEME.select}
-            value={lang}
-            onChange={(e) => setLang(e.target.value as LanguageKey)}
-          >
-            {LANGUAGE_OPTIONS.map((o) => (
-              <option key={o.key} value={o.key}>{o.label}</option>
-            ))}
-          </select>
-        </div>
+      <div className={`border-b ${THEME.divider} ${THEME.headerBg}`}>
+        <div className="flex items-center gap-3 p-3">
+          <div className="text-lg font-semibold">{BRAND}</div>
+          <button onClick={() => setView('home')} className={`ml-2 px-3 py-1 rounded ${THEME.controlBg}`}>Home</button>
+          <a href="/#blog" className={`px-3 py-1 rounded ${THEME.controlBg}`}>Blog</a>
+          <a href="/privacy.html" className={`px-3 py-1 rounded ${THEME.controlBg}`}>Privacy</a>
 
-        <div className="ml-2">
-          <button
-            className={`px-2 py-1 rounded ${THEME.controlBg}`}
-            onClick={() => setTheme(theme === 'vs-dark' ? 'light' : 'vs-dark')}
-          >
-            {theme === 'vs-dark' ? 'Light' : 'Dark'} Theme
-          </button>
-        </div>
+          <div className="flex items-center gap-2">
+            <label className="text-sm text-gray-300">Language</label>
+            <select
+              className={THEME.select}
+              value={lang}
+              onChange={(e) => setLang(e.target.value as LanguageKey)}
+            >
+              {LANGUAGE_OPTIONS.map((o) => (
+                <option key={o.key} value={o.key}>{o.label}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="ml-2">
-          <button
-            className="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded"
-            onClick={runCode}
-            disabled={loading}
-          >
-            {loading ? 'Running…' : 'Run'}
-          </button>
-        </div>
+          <div className="ml-2">
+            <button
+              className={`px-2 py-1 rounded ${THEME.controlBg}`}
+              onClick={() => setTheme(theme === 'vs-dark' ? 'light' : 'vs-dark')}
+            >
+              {theme === 'vs-dark' ? 'Light' : 'Dark'} Theme
+            </button>
+          </div>
 
-        <div className="ml-2">
-          <button
-            className="px-3 py-1 rounded bg-white/10 hover:bg-white/15 border border-white/10"
-            onClick={saveLocal}
-          >
-            Save
-          </button>
-        </div>
+          <div className="ml-2">
+            <button
+              className="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded"
+              onClick={runCode}
+              disabled={loading}
+            >
+              {loading ? 'Running...' : 'Run'}
+            </button>
+          </div>
 
-        <div className="ml-2">
-          <button
-            className="px-3 py-1 rounded bg-white/10 hover:bg-white/15 border border-white/10"
-            onClick={loadTemplate}
-          >
-            Reset
-          </button>
-        </div>
+          <div className="ml-2">
+            <button
+              className="px-3 py-1 rounded bg-white/10 hover:bg-white/15 border border-white/10"
+              onClick={saveLocal}
+            >
+              Save
+            </button>
+          </div>
 
-        <div className="ml-2">
-          <label className={`px-3 py-1 rounded ${THEME.controlBg} cursor-pointer`}>
-            Import file
-            <input
-              type="file"
-              className="hidden"
-              onChange={(e) => onUpload(e.target.files?.[0])}
-            />
-          </label>
-        </div>
+          <div className="ml-2">
+            <button
+              className="px-3 py-1 rounded bg-white/10 hover:bg-white/15 border border-white/10"
+              onClick={loadTemplate}
+            >
+              Reset
+            </button>
+          </div>
 
-        <div className="ml-auto text-sm text-gray-400">
-          Ctrl/Cmd + Enter to run
+          <div className="ml-2">
+            <label className={`px-3 py-1 rounded ${THEME.controlBg} cursor-pointer`}>
+              Import file
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => onUpload(e.target.files?.[0])}
+              />
+            </label>
+          </div>
+
+          <div className="ml-auto text-sm text-gray-400">
+            Ctrl/Cmd + Enter to run
+          </div>
         </div>
-      </div>
-      <div className={`p-2 border-b ${THEME.divider} ${THEME.headerBg}`}>
-        <AdSlot slot="4521143365" className="mx-auto max-w-6xl" format="auto" />
+        <div className="px-3 pb-3">
+          <div className="text-[11px] uppercase tracking-[0.2em] text-gray-400 mb-1">Advertisement</div>
+          <div className={`rounded border ${THEME.divider} bg-black/20 p-2`}>
+            <AdSlot slot="4521143365" className="w-full" format="auto" style={{ minHeight: 90 }} />
+          </div>
+        </div>
       </div>
 
       {/* Middle: Editor + Results */}
@@ -190,17 +198,23 @@ export default function App() {
               {result && (
                 <span>
                   {result.time ? `Time: ${result.time}s` : ''}
-                  {result.time && result.memory ? ' · ' : ''}
+                  {result.time && result.memory ? ' | ' : ''}
                   {result.memory ? `Mem: ${result.memory} KB` : ''}
                 </span>
               )}
             </div>
           </div>
           <pre className={`flex-1 overflow-auto p-3 text-sm whitespace-pre-wrap ${THEME.preBg}`}>{outputText}</pre>
+          <div className={`border-t ${THEME.divider} p-3 ${THEME.paneBg}`}>
+            <div className="text-[11px] uppercase tracking-[0.2em] text-gray-400 mb-1">Advertisement</div>
+            <div className="rounded border border-white/10 bg-black/20 p-2">
+              <AdSlot slot="5834225030" className="w-full" format="auto" style={{ minHeight: 250 }} />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Bottom: STDIN */}
+      {/* Bottom: STDIN + guidance */}
       <div className={`p-2 border-t ${THEME.divider} ${THEME.paneBg}`}>
         <div className="text-sm text-gray-300 mb-1">STDIN</div>
         <textarea
@@ -209,6 +223,9 @@ export default function App() {
           onChange={(e) => setStdin(e.target.value)}
           placeholder="Type input passed to your program here"
         />
+        <p className="text-xs text-gray-400 mt-2">
+          We execute your code inside an isolated sandbox. Please avoid secrets or production keys; saved code stays in your browser unless you export it.
+        </p>
       </div>
     </div>
   );

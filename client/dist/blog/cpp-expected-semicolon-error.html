@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fixing the "expected ; before" error in C++ | Local Online Compiler</title>
+  <meta name="description" content="A step-by-step guide to fixing the common C++ error 'expected ; before token'. Learn the cause, see before/after code, and test the fix in the online compiler.">
+  <link rel="canonical" href="https://suryadaiv.github.io/blog/cpp-expected-semicolon-error.html">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6763408721406920" crossorigin="anonymous"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; padding:0; }
+    main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1,h2,h3 { color:#f8fafc; }
+    a { color:#93c5fd; }
+    pre { background:#111827; border:1px solid #1f2937; padding:12px; border-radius:10px; overflow:auto; }
+    section { margin-top:24px; }
+    .ad { margin: 24px 0; padding: 12px; border:1px solid #1f2937; border-radius:10px; background:#0b1221; }
+    .label { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#94a3b8; margin-bottom:6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="label">Blog · C++</p>
+    <h1>Fixing the "expected ; before" error in C++</h1>
+    <p>C++ is strict about punctuation. If the compiler cannot find a semicolon where it expects one, it stops and emits an error like <strong>expected ‘;’ before ‘token’</strong>. This guide explains what the message really means, shows a failing snippet, and walks through a clean fix you can test immediately in the <a href="/">Local Online Compiler</a>.</p>
+
+    <section>
+      <h2>Why this error appears</h2>
+      <ul>
+        <li>You ended a statement without a semicolon.</li>
+        <li>You accidentally removed a closing brace, so the parser thinks the statement continues.</li>
+        <li>You added a stray colon or comma in a declaration.</li>
+      </ul>
+      <pre>// Broken: missing semicolon
+int add(int a, int b) {
+    return a + b
+}
+
+int main() {
+    int total = add(2, 3);
+    std::cout << total << std::endl;
+}</pre>
+      <pre>// Fixed
+int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int total = add(2, 3);
+    std::cout << total << std::endl;
+}</pre>
+    </section>
+
+    <section>
+      <h2>Quick checklist</h2>
+      <ol>
+        <li>Scan the line the compiler reports and the line right before it.</li>
+        <li>Ensure every <code>return</code> statement ends with <code>;</code>.</li>
+        <li>Check that braces are balanced so the parser is not reading into the next function.</li>
+        <li>Rebuild and confirm the message is gone.</li>
+      </ol>
+    </section>
+
+    <div class="ad">
+      <div class="label">Advertisement</div>
+      <ins class="adsbygoogle" style="display:block; height:250px;"
+        data-ad-client="ca-pub-6763408721406920"
+        data-ad-slot="8370573240"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section>
+      <h2>Try it now</h2>
+      <p>Paste the fixed code into the <a href="/">online compiler</a> and run it. If you still see an error, double-check that every statement ends cleanly, especially in header/source splits.</p>
+    </section>
+
+    <section>
+      <h2>More resources</h2>
+      <p>For a deeper dive into avoiding "thin content" while monetizing developer tools, see our homepage sections on policy compliance and UX. We keep ads clearly labeled and away from core buttons to prevent accidental clicks.</p>
+    </section>
+  </main>
+</body>
+</html>

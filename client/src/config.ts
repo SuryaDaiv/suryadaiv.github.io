@@ -1,6 +1,6 @@
 export const BRAND = 'Local Online Compiler';
-export const SITE_URL = 'http://localhost:5173';
-export const TITLE_SUFFIX = ' — Run Code in Your Browser';
+export const SITE_URL = 'https://suryadaiv.github.io';
+export const TITLE_SUFFIX = ' - Run Code in Your Browser';
 
 // Simple, consistent, low-noise background tokens
 export const THEME = {

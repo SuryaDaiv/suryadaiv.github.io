@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Python IndentationError: unexpected indent (solution) | Local Online Compiler</title>
+  <meta name="description" content="Learn why Python throws IndentationError: unexpected indent, how tabs vs spaces cause it, and copy a working snippet to test in the online compiler.">
+  <link rel="canonical" href="https://suryadaiv.github.io/blog/python-unexpected-indent-solution.html">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6763408721406920" crossorigin="anonymous"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; padding:0; }
+    main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1,h2,h3 { color:#f8fafc; }
+    a { color:#93c5fd; }
+    pre { background:#111827; border:1px solid #1f2937; padding:12px; border-radius:10px; overflow:auto; }
+    section { margin-top:24px; }
+    .ad { margin: 24px 0; padding: 12px; border:1px solid #1f2937; border-radius:10px; background:#0b1221; }
+    .label { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#94a3b8; margin-bottom:6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="label">Blog · Python</p>
+    <h1>Python IndentationError: unexpected indent — explained and fixed</h1>
+    <p>Python treats whitespace as syntax. Mixing tabs and spaces or adding a stray indent is all it takes to trigger <strong>IndentationError: unexpected indent</strong>. Here is a short, actionable guide to fix it and keep your files clean.</p>
+
+    <section>
+      <h2>Root causes</h2>
+      <ul>
+        <li>Tabs and spaces mixed in the same block.</li>
+        <li>An extra space before a function, loop, or conditional.</li>
+        <li>Copying code from the web with non-breaking spaces.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Before and after</h2>
+      <pre># Broken: stray indent before print
+def greet(name):
+        message = f"Hello {name}"
+    print(message)</pre>
+      <pre># Fixed: consistent 4-space indents
+def greet(name):
+    message = f"Hello {name}"
+    print(message)</pre>
+    </section>
+
+    <section>
+      <h2>Quick fix checklist</h2>
+      <ol>
+        <li>Enable "soft tabs" (spaces) in your editor. The online compiler uses 4 spaces by default.</li>
+        <li>Select all and convert tabs to spaces.</li>
+        <li>Align blocks under <code>def</code>, <code>if</code>, <code>for</code>, and <code>while</code>.</li>
+        <li>Re-run the code and confirm the error disappears.</li>
+      </ol>
+    </section>
+
+    <div class="ad">
+      <div class="label">Advertisement</div>
+      <ins class="adsbygoogle" style="display:block; height:250px;"
+        data-ad-client="ca-pub-6763408721406920"
+        data-ad-slot="5834225030"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <section>
+      <h2>Test it instantly</h2>
+      <p>Open the <a href="/">online compiler</a>, paste the fixed version, and run it. If you are still stuck, set the editor to show invisible characters so you can spot rogue tabs.</p>
+    </section>
+  </main>
+</body>
+</html>
