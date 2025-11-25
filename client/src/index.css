@@ -4,15 +4,29 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #2563EB;
+  --color-secondary: #0F172A;
+  --color-ink: #0F172A;
+  --color-background: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-border: #E2E8F0;
+  --color-error: #EF4444;
+}
+
 @layer base {
   html {
     font-family: 'Inter', sans-serif;
   }
 }
 
-html, body, #root { 
-  height: 100%; 
+html,
+body,
+#root {
+  height: 100%;
   @apply bg-background text-secondary;
 }
 
-.monaco-container { height: 100%; }
+.monaco-container {
+  height: 100%;
+}
