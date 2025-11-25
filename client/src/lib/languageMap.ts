@@ -10,6 +10,9 @@ export const LANGUAGE_IDS: Record<LanguageKey, number> = {
   python: 71, // Python 3
   go: 60,
   ruby: 72,
+  kotlin: 78, // Kotlin
+  sql: 82,    // SQL (SQLite)
+  rust: 73,   // Rust
 };
 
 export const LANGUAGE_LABELS: Record<LanguageKey, string> = {
@@ -22,6 +25,9 @@ export const LANGUAGE_LABELS: Record<LanguageKey, string> = {
   python: 'Python',
   go: 'Go',
   ruby: 'Ruby',
+  kotlin: 'Kotlin',
+  sql: 'SQL',
+  rust: 'Rust',
 };
 
 export const MONACO_LANG_BY_KEY: Record<LanguageKey, string> = {
@@ -34,6 +40,9 @@ export const MONACO_LANG_BY_KEY: Record<LanguageKey, string> = {
   python: 'python',
   go: 'go',
   ruby: 'ruby',
+  kotlin: 'kotlin',
+  sql: 'sql',
+  rust: 'rust',
 };
 
 export function normalizeLanguageSelection(input: string): LanguageKey | undefined {
@@ -55,6 +64,11 @@ export function normalizeLanguageSelection(input: string): LanguageKey | undefin
     golang: 'go',
     ruby: 'ruby',
     rb: 'ruby',
+    kotlin: 'kotlin',
+    kt: 'kotlin',
+    sql: 'sql',
+    rust: 'rust',
+    rs: 'rust',
   };
   return map[key];
 }

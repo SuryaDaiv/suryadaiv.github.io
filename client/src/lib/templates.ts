@@ -25,5 +25,24 @@ console.log(input);
 `,
   ruby: `puts "Hello Ruby"; puts STDIN.read
 `,
+  kotlin: `fun main() {
+    val input = readLine() ?: ""
+    println("Hello Kotlin")
+    println(input)
+}
+`,
+  sql: `-- SQLite
+CREATE TABLE demo (id INTEGER, name TEXT);
+INSERT INTO demo VALUES (1, 'Hello SQL');
+SELECT * FROM demo;
+`,
+  rust: `use std::io::{self, Read};
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_to_string(&mut input).unwrap();
+    println!("Hello Rust");
+    print!("{}", input);
+}
+`,
 };
 

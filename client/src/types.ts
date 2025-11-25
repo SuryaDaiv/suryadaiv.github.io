@@ -7,7 +7,10 @@ export type LanguageKey =
   | 'typescript'
   | 'python'
   | 'go'
-  | 'ruby';
+  | 'ruby'
+  | 'kotlin'
+  | 'sql'
+  | 'rust';
 
 export interface RunRequestBody {
   language?: string;
