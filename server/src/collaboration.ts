@@ -1,6 +1,11 @@
 import { Server as SocketServer } from 'socket.io';
-import { nanoid } from 'nanoid';
 import type { Server as HTTPServer } from 'http';
+import { randomBytes } from 'crypto';
+
+// Generate session ID using crypto instead of nanoid
+function generateSessionId(): string {
+    return randomBytes(5).toString('base64url');
+}
 
 // Types
 interface Participant {
@@ -50,7 +55,7 @@ export function initializeCollaboration(httpServer: HTTPServer) {
         cors: {
             origin: process.env.NODE_ENV === 'production'
                 ? ['https://suryadaiv.github.io']
-                : ['http://localhost:5173', 'http://localhost:5174', 'https://suryadaiv.github.io'],
+                : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175', 'https://suryadaiv.github.io'],
             methods: ['GET', 'POST'],
             credentials: true
         },
@@ -67,7 +72,7 @@ export function initializeCollaboration(httpServer: HTTPServer) {
         // Create a new session
         socket.on('create-session', (data: { language: string; code: string; stdin?: string }, callback) => {
             try {
-                const sessionId = nanoid(10);
+                const sessionId = generateSessionId();
                 const name = generateRandomName();
 
                 const session: Session = {
@@ -146,8 +151,6 @@ export function initializeCollaboration(httpServer: HTTPServer) {
                     success: true,
                     sessionId: data.sessionId,
                     name,
-
-
                     language: session.language,
                     code: session.code,
                     stdin: session.stdin,
@@ -169,7 +172,6 @@ export function initializeCollaboration(httpServer: HTTPServer) {
             session.code = data.code;
             session.lastActivity = new Date();
 
-            // Broadcast to all other participants in the session
             socket.to(currentSessionId).emit('code-update', {
                 code: data.code,
                 updatedBy: participantName
@@ -217,13 +219,11 @@ export function initializeCollaboration(httpServer: HTTPServer) {
                 if (session) {
                     session.participants.delete(socket.id);
 
-                    // Notify others
                     socket.to(currentSessionId).emit('participant-left', {
                         socketId: socket.id,
                         name: participantName
                     });
 
-                    // Delete session if no participants left
                     if (session.participants.size === 0) {
                         console.log(`Deleting empty session: ${currentSessionId}`);
                         sessions.delete(currentSessionId);
